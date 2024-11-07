@@ -18,5 +18,6 @@ public class Database {
         } catch (Exception e) {
             System.err.println("Koneksi gagal " +e.getMessage());
         }
+        System.out.println("anjai mabar");
     }
 }

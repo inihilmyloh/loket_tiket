@@ -1,7 +1,7 @@
 package database;
 
 import java.sql.*;
-//test pull ke master
+
 public class Database {
    public static Connection com;
     public static Statement stm; 

@@ -15,7 +15,7 @@ public class Database {
             com =DriverManager.getConnection(url,user,pass);
             stm =com.createStatement();
             System.out.println("Koneksi berhasil");
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             System.err.println("Koneksi gagal " +e.getMessage());
         }
     }

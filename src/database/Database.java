@@ -8,7 +8,7 @@ public class Database {
 
     public static void main(String[] args) {
         try {
-            String url = "jdbc:mysql://localhost:3306/app_rental";
+            String url = "jdbc:mysql://localhost:3306/loket_tiket";
             String user = "root";
             String pass = "";
             Class.forName("com.mysql.cj.jdbc.Driver");

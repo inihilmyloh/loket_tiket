@@ -3,7 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
+//terserah
 public class Database {
     private String jdbcUrl = "jdbc:mysql://localhost:3306/loket_tiket"; // Ganti dengan URL database
     private String username = "root"; // Ganti dengan username database

@@ -1,22 +1,27 @@
 package database;
 
-import java.sql.*;
-//ay mencoba
-public class Database {
-   public static Connection com;
-    public static Statement stm; 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-    public static void main(String[] args) {
+public class Database {
+    private String jdbcUrl = "jdbc:mysql://localhost:3306/loket_tiket"; // Ganti dengan URL database
+    private String username = "root"; // Ganti dengan username database
+    private String password = ""; // Ganti dengan password database
+    private Connection connection;
+
+    // Constructor untuk membuat koneksi
+    public Database() {
         try {
-            String url = "jdbc:mysql://localhost:3306/loket_tiket";
-            String user = "root";
-            String pass = "";
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            com =DriverManager.getConnection(url,user,pass);
-            stm =com.createStatement();
-            System.out.println("Koneksi berhasil");
-        } catch (ClassNotFoundException | SQLException e) {
-            System.err.println("Koneksi gagal " +e.getMessage());
+            connection = DriverManager.getConnection(jdbcUrl, username, password);
+            System.out.println("Koneksi berhasil!");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+    }
+
+    // Method untuk mendapatkan koneksi
+    public Connection getConnection() {
+        return connection;
     }
 }

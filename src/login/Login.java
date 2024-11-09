@@ -9,5 +9,7 @@ package login;
  * @author hilmy
  */
 public class Login {
-
+    public static void main(String[] args) {
+        int i=0;
+    }
 }

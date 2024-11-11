@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package login;
+import Halaman.HalamanUtama;
+import com.mysql.cj.jdbc.StatementImpl;
 import com.mysql.cj.protocol.Resultset;
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +17,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import database.Database;
+import Halaman.*;
+
 /**
  *
  * @author ASUS
@@ -267,8 +272,9 @@ public class awal extends javax.swing.JFrame {
        try{
            Class.forName("com.mysql.cj.jdbc.Driver");
             com =DriverManager.getConnection(url,suser,spass);
-            stm =com.createStatement();
-            if("".equals(user.getText())){
+            stm =(Statement)com.createStatement();
+            
+             if("".equals(user.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Masukan Username", "Error", JOptionPane.ERROR_MESSAGE);
             }else if("".equals(pass.getText())){
                 JOptionPane.showMessageDialog(new JFrame(), "Masukan Password", "Error", JOptionPane.ERROR_MESSAGE);
@@ -281,16 +287,34 @@ public class awal extends javax.swing.JFrame {
                 while(ler.next()){
                     passDB=ler.getString("password");
                     tidak=1;
-                }
-                if(tidak==1 && password.equals(passDB)){
+                    Admin adminFrame=new Admin();
                     HalamanUtama utamaFrame=new HalamanUtama();
+                     if("Admin".equals(ler.getString("level"))){
+                    utamaFrame.setVisible(false);
+                    adminFrame.setVisible(true);
+                    adminFrame.pack();
+                    adminFrame.setLocationRelativeTo(null);
+                    this.dispose();;
+                }
+                     else if("Pegawai".equals(ler.getString("level"))){
+                    adminFrame.setVisible(false);
                     utamaFrame.setVisible(true);
                     utamaFrame.pack();
                     utamaFrame.setLocationRelativeTo(null);
                     this.dispose();;
-                }else{
+                     }
+                     else{
                     JOptionPane.showMessageDialog(new JFrame(), "Username dan Password Salah", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+          
                 }
+                        
+                        
+                //if(tidak==1 && password.equals(passDB)){
+                   
+                //}else{
+                    //JOptionPane.showMessageDialog(new JFrame(), "Username dan Password Salah", "Error", JOptionPane.ERROR_MESSAGE);
+                //}
                 
                 user.setText("");
                 pass.setText("");

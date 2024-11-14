@@ -15,6 +15,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import main.Menu_admin;
 /**
  *
  * @author ASUS
@@ -283,11 +284,10 @@ public class awal extends javax.swing.JFrame {
                     tidak=1;
                 }
                 if(tidak==1 && password.equals(passDB)){
-                    HalamanUtama utamaFrame=new HalamanUtama();
-                    utamaFrame.setVisible(true);
-                    utamaFrame.pack();
-                    utamaFrame.setLocationRelativeTo(null);
-                    this.dispose();;
+                    Menu_admin menu=new Menu_admin();
+                    menu.setVisible(true);
+                    menu.revalidate();
+                    this.dispose();
                 }else{
                     JOptionPane.showMessageDialog(new JFrame(), "Username dan Password Salah", "Error", JOptionPane.ERROR_MESSAGE);
                 }

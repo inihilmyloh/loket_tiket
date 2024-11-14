@@ -56,6 +56,7 @@ public class Menu_Item extends javax.swing.JPanel {
         lb_iconSub = new javax.swing.JLabel();
         lb_icon = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);
@@ -69,13 +70,13 @@ public class Menu_Item extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(lb_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lb_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(lb_iconSub, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(lb_menuName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(lb_iconSub, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lb_menuName, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,14 +109,13 @@ public class Menu_Item extends javax.swing.JPanel {
     private javax.swing.JLabel lb_menuName;
     // End of variables declaration//GEN-END:variables
 
-    private void showMenu() {
+    private void hideMenu() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //for (int i = 0; i < subMenu.size(); 1++) {
-                for (int i = 0; i < subMenu.size(); i++) {
+                for (int i = subMenu.size() - 1; i >= 0; i--) {
                     sleep();
-                    subMenu.get(i).setVisible(true);
+                    subMenu.get(i).setVisible(false);
                     subMenu.get(i).hideMenu();
                 }
                 getParent().repaint();
@@ -125,19 +125,17 @@ public class Menu_Item extends javax.swing.JPanel {
         }).start();
     }
 
-    private void hideMenu() {
+    private void showMenu() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                // for (int i = subMenu.size() - 1; i >= 0; 1--) {
-                for (int i = subMenu.size() - 1; i >= 0; i--) {
+                for (int i = 0; i < subMenu.size(); i++) {
                     sleep();
-                    subMenu.get(i).setVisible(false);
-                    subMenu.get(i).hideMenu();
+                    subMenu.get(i).setVisible(true);
                 }
+                showing = true;
                 getParent().repaint();
                 getParent().revalidate();
-                showing = false;
             }
         }).start();
     }

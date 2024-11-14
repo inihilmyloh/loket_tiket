@@ -147,6 +147,22 @@ public class Menu_admin extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void execute() {
+        ImageIcon iconAdmin = new ImageIcon(getClass().getResource("/gambar/Admin.png"));
+        ImageIcon iconStok = new ImageIcon(getClass().getResource("/gambar/Box.png"));
+        ImageIcon icontransaksi = new ImageIcon(getClass().getResource("/gambar/cart.png"));
+        
+        Menu_Item Stok= new Menu_Item(null, true, iconStok, "Stok", null);
+        Menu_Item Stok2= new Menu_Item(null, true, iconStok, "Stok", null);
+        
+        Menu_Item Transaksi= new Menu_Item(null, true, icontransaksi, "Transaksi", null);
+        Menu_Item Transaksi2= new Menu_Item(null, true, icontransaksi, "Transaksi", null);
+        Menu_Item Transaksi3= new Menu_Item(null, true, icontransaksi, "Transaksi", null);
+        
+        Menu_Item menuAdmin= new Menu_Item(iconAdmin, false, null, "Admin", null, Stok,Stok2);
+        Menu_Item menuTransaksi= new Menu_Item(iconAdmin, false, null, "Transaksi", null, Transaksi, Transaksi2, Transaksi3);
+        Menu_Item menuReport= new Menu_Item(iconAdmin, false, null, "Report", null);
+        
+        addMenu(menuAdmin,menuTransaksi,menuReport);
         
     }
     

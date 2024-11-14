@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package main;
+
+import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
+
 /**
  *
  * @author hilmy
@@ -17,7 +20,7 @@ public class Menu_admin extends javax.swing.JFrame {
     public Menu_admin() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+
         execute();
     }
 
@@ -38,8 +41,13 @@ public class Menu_admin extends javax.swing.JFrame {
         pn_utama = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        pn_navbar.setBackground(new java.awt.Color(0, 153, 153));
+        pn_navbar.setBackground(new java.awt.Color(17, 31, 42));
         pn_navbar.setPreferredSize(new java.awt.Dimension(718, 70));
 
         javax.swing.GroupLayout pn_navbarLayout = new javax.swing.GroupLayout(pn_navbar);
@@ -102,6 +110,12 @@ public class Menu_admin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        pn_utama.add(new Content_bg());
+        pn_utama.repaint();
+        pn_utama.revalidate();
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -148,30 +162,47 @@ public class Menu_admin extends javax.swing.JFrame {
 
     private void execute() {
         ImageIcon iconAdmin = new ImageIcon(getClass().getResource("/gambar/Admin.png"));
-        ImageIcon iconStok = new ImageIcon(getClass().getResource("/gambar/Box.png"));
+        ImageIcon iconTiket = new ImageIcon(getClass().getResource("/gambar/ticket.png"));
         ImageIcon icontransaksi = new ImageIcon(getClass().getResource("/gambar/cart.png"));
-        
-        Menu_Item Stok= new Menu_Item(null, true, iconStok, "Stok", null);
-        Menu_Item Stok2= new Menu_Item(null, true, iconStok, "Stok", null);
-        
-        Menu_Item Transaksi= new Menu_Item(null, true, icontransaksi, "Transaksi", null);
-        Menu_Item Transaksi2= new Menu_Item(null, true, icontransaksi, "Transaksi", null);
-        Menu_Item Transaksi3= new Menu_Item(null, true, icontransaksi, "Transaksi", null);
-        
-        Menu_Item menuAdmin= new Menu_Item(iconAdmin, false, null, "Admin", null, Stok,Stok2);
-        Menu_Item menuTransaksi= new Menu_Item(iconAdmin, false, null, "Transaksi", null, Transaksi, Transaksi2, Transaksi3);
-        Menu_Item menuReport= new Menu_Item(iconAdmin, false, null, "Report", null);
-        
-        addMenu(menuAdmin,menuTransaksi,menuReport);
-        
+
+        Menu_Item tiket = new Menu_Item(null, true, iconTiket, "Tiket", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pn_utama.removeAll();
+                pn_utama.add(new Form_Tiket());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
+        Menu_Item tiket2 = new Menu_Item(null, true, iconTiket, "Stok", null);
+
+        Menu_Item Transaksi = new Menu_Item(null, true, icontransaksi, "Transaksi", null);
+        Menu_Item Transaksi2 = new Menu_Item(null, true, icontransaksi, "Transaksi", null);
+        Menu_Item Transaksi3 = new Menu_Item(null, true, icontransaksi, "Transaksi", null);
+
+        Menu_Item menuHome = new Menu_Item(iconAdmin, false, null, "Home", new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pn_utama.removeAll();
+                pn_utama.add(new Content_bg());
+                pn_utama.repaint();
+                pn_utama.revalidate();
+            }
+        });
+        Menu_Item menuAdmin = new Menu_Item(iconAdmin, false, null, "Admin", null, tiket, tiket2);
+        Menu_Item menuTransaksi = new Menu_Item(iconAdmin, false, null, "Transaksi", null, Transaksi, Transaksi2, Transaksi3);
+        Menu_Item menuReport = new Menu_Item(iconAdmin, false, null, "Report", null);
+
+        addMenu(menuHome, menuAdmin, menuTransaksi, menuReport);
+
     }
-    
-    private void addMenu(Menu_Item... menu){
-        for(int i=0;i<menu.length;i++){
+
+    private void addMenu(Menu_Item... menu) {
+        for (int i = 0; i < menu.length; i++) {
             pn_menu.add(menu[i]);
-            ArrayList<Menu_Item>subMenu = menu[i].getSubMenu();
-            for(Menu_Item m : subMenu){
-            addMenu(m);
+            ArrayList<Menu_Item> subMenu = menu[i].getSubMenu();
+            for (Menu_Item m : subMenu) {
+                addMenu(m);
             }
         }
         pn_menu.revalidate();

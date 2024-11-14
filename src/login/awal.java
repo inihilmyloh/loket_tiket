@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package login;
+
 import com.mysql.cj.protocol.Resultset;
 import javax.swing.*;
 import java.awt.*;
@@ -16,33 +17,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import main.Menu_admin;
+
 /**
  *
  * @author ASUS
  */
 public class awal extends javax.swing.JFrame {
-    public static Connection com;
-    public static Statement stm; 
-    int xx,xy;
-    int x,y;
 
-    
+    public static Connection com;
+    public static Statement stm;
+    int xx, xy;
+    int x, y;
+
     public awal() {
         initComponents();
         hide.setVisible(false);
-        keluar2.setVisible(false); 
+        keluar2.setVisible(false);
         maxi2.setVisible(false);
-        mini2.setVisible(false); 
-        
+        mini2.setVisible(false);
+
         gae.addMouseListener(new MouseAdapter() {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            // Membuka JFrame Login
-            resgister register_uiFrame = new resgister();
-            register_uiFrame.setVisible(true);
-            dispose();
-                }});
-        
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Membuka JFrame Login
+                resgister register_uiFrame = new resgister();
+                register_uiFrame.setVisible(true);
+                dispose();
+            }
+        });
 
     }
 
@@ -228,30 +230,30 @@ public class awal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MousePressed
-      xx = evt.getX();
-      xy = evt.getY();
+        xx = evt.getX();
+        xy = evt.getY();
     }//GEN-LAST:event_jLabel1MousePressed
 
     private void jLabel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseDragged
-      x=evt.getXOnScreen();
-      y=evt.getYOnScreen();
-      this.setLocation(x - xx,y - xy);
+        x = evt.getXOnScreen();
+        y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
     }//GEN-LAST:event_jLabel1MouseDragged
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-      //show.setVisible(false);
-      //hide.setVisible(true);
-      //pass.setEchoChar((char)0);
+        //show.setVisible(false);
+        //hide.setVisible(true);
+        //pass.setEchoChar((char)0);
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void hideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMouseClicked
-      show.setVisible(true);
-      hide.setVisible(false);
-      pass.setEchoChar('•');
+        show.setVisible(true);
+        hide.setVisible(false);
+        pass.setEchoChar('•');
     }//GEN-LAST:event_hideMouseClicked
 
     private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
-        
+
     }//GEN-LAST:event_passActionPerformed
 
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
@@ -259,46 +261,54 @@ public class awal extends javax.swing.JFrame {
     }//GEN-LAST:event_userActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
-        String nama,password,query,passDB=null;
-       String url,suser,spass;
-       url="jdbc:mysql://localhost:3306/loket_tiket";
-       suser="root";
-       spass="";
-       int tidak=0;
-       try{
-           Class.forName("com.mysql.cj.jdbc.Driver");
-            com =DriverManager.getConnection(url,suser,spass);
-            stm =com.createStatement();
-            if("".equals(user.getText())){
+        String nama, password, query, passDB = null;
+        String url, suser, spass;
+        url = "jdbc:mysql://localhost:3306/loket_tiket";
+        suser = "root";
+        spass = "";
+        int tidak = 0;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            com = DriverManager.getConnection(url, suser, spass);
+            stm = com.createStatement();
+            if ("".equals(user.getText())) {
                 JOptionPane.showMessageDialog(new JFrame(), "Masukan Username", "Error", JOptionPane.ERROR_MESSAGE);
-            }else if("".equals(pass.getText())){
+            } else if ("".equals(pass.getText())) {
                 JOptionPane.showMessageDialog(new JFrame(), "Masukan Password", "Error", JOptionPane.ERROR_MESSAGE);
-            }else{
-                nama=user.getText();
-                password=passhash(pass.getText());
-                
-                query="SELECT * FROM login WHERE username=  '"+nama+"'";
-                ResultSet ler=stm.executeQuery(query);
-                while(ler.next()){
-                    passDB=ler.getString("password");
-                    tidak=1;
+            } else {
+                nama = user.getText();
+                password = passhash(pass.getText());
+
+                query = "SELECT * FROM login WHERE username=  '" + nama + "'";
+                ResultSet ler = stm.executeQuery(query);
+                while (ler.next()) {
+                    passDB = ler.getString("password");
+                    tidak = 1;
                 }
-                if(tidak==1 && password.equals(passDB)){
-                    Menu_admin menu=new Menu_admin();
-                    menu.setVisible(true);
-                    menu.revalidate();
-                    this.dispose();
-                }else{
+                if ("Admin".equals(ler.getString("level"))) {
+                    utamaFrame.setVisible(false);
+                    adminFrame.setVisible(true);
+                    adminFrame.pack();
+                    adminFrame.setLocationRelativeTo(null);
+                    this.dispose();;
+                } else if ("Pegawai".equals(ler.getString("level"))) {
+                    adminFrame.setVisible(false);
+                    utamaFrame.setVisible(true);
+                    utamaFrame.pack();
+                    utamaFrame.setLocationRelativeTo(null);
+                    this.dispose();;
+
+                } else {
                     JOptionPane.showMessageDialog(new JFrame(), "Username dan Password Salah", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                
+
                 user.setText("");
                 pass.setText("");
-               
+
             }
-       }catch(ClassNotFoundException | SQLException e){
-           System.out.println("error"+e.getMessage());
-       }
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("error" + e.getMessage());
+        }
     }//GEN-LAST:event_loginActionPerformed
 
     private void keluar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluar2MouseClicked
@@ -306,83 +316,83 @@ public class awal extends javax.swing.JFrame {
     }//GEN-LAST:event_keluar2MouseClicked
 
     private void keluar2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluar2MouseEntered
-      keluar.setVisible(false);
-      keluar2.setVisible(true);
-      setCursor(new Cursor(Cursor.HAND_CURSOR));
+        keluar.setVisible(false);
+        keluar2.setVisible(true);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_keluar2MouseEntered
 
     private void keluar2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluar2MouseExited
-      keluar.setVisible(true);
-      keluar2.setVisible(false);
-      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        keluar.setVisible(true);
+        keluar2.setVisible(false);
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_keluar2MouseExited
 
     private void keluarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluarMouseEntered
         keluar.setVisible(false);
-      keluar2.setVisible(true);
-       setCursor(new Cursor(Cursor.HAND_CURSOR));
+        keluar2.setVisible(true);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_keluarMouseEntered
 
     private void keluarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_keluarMouseExited
         keluar.setVisible(true);
-      keluar2.setVisible(false);
-       setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        keluar2.setVisible(false);
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_keluarMouseExited
 
     private void maxiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxiMouseEntered
-       maxi2.setVisible(true);
-      maxi.setVisible(false);
-      setCursor(new Cursor(Cursor.HAND_CURSOR));
+        maxi2.setVisible(true);
+        maxi.setVisible(false);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_maxiMouseEntered
 
     private void maxiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxiMouseExited
         maxi.setVisible(true);
-      maxi2.setVisible(false);
-       setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        maxi2.setVisible(false);
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_maxiMouseExited
 
     private void maxi2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxi2MouseClicked
-        
+
     }//GEN-LAST:event_maxi2MouseClicked
 
     private void maxi2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxi2MouseEntered
-         maxi2.setVisible(true);
-      maxi.setVisible(false);
-      setCursor(new Cursor(Cursor.HAND_CURSOR));
+        maxi2.setVisible(true);
+        maxi.setVisible(false);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_maxi2MouseEntered
 
     private void maxi2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxi2MouseExited
         maxi.setVisible(true);
-      maxi2.setVisible(false);
-       setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        maxi2.setVisible(false);
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_maxi2MouseExited
 
     private void miniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miniMouseEntered
-      mini.setVisible(false);
-      mini2.setVisible(true);
-       setCursor(new Cursor(Cursor.HAND_CURSOR));
+        mini.setVisible(false);
+        mini2.setVisible(true);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_miniMouseEntered
 
     private void miniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miniMouseExited
-      mini.setVisible(true);
-      mini2.setVisible(false);
-      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        mini.setVisible(true);
+        mini2.setVisible(false);
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_miniMouseExited
 
     private void mini2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mini2MouseEntered
-         mini.setVisible(false);
-      mini2.setVisible(true);
-      setCursor(new Cursor(Cursor.HAND_CURSOR));
+        mini.setVisible(false);
+        mini2.setVisible(true);
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
     }//GEN-LAST:event_mini2MouseEntered
 
     private void mini2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mini2MouseExited
         mini.setVisible(true);
-      mini2.setVisible(false);
-      setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        mini2.setVisible(false);
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_mini2MouseExited
 
     private void mini2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mini2MouseClicked
-       this.setState(awal.ICONIFIED);
+        this.setState(awal.ICONIFIED);
     }//GEN-LAST:event_mini2MouseClicked
 
     private void showMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showMouseEntered
@@ -398,32 +408,32 @@ public class awal extends javax.swing.JFrame {
     }//GEN-LAST:event_hideMouseEntered
 
     private void hideMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hideMouseExited
-         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_hideMouseExited
 
     private void showMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_showMouseClicked
         show.setVisible(false);
-      hide.setVisible(true);
-      pass.setEchoChar((char)0);
+        hide.setVisible(true);
+        pass.setEchoChar((char) 0);
     }//GEN-LAST:event_showMouseClicked
 
-     public static String passhash(String password){
+    public static String passhash(String password) {
         try {
-            MessageDigest md=MessageDigest.getInstance("SHA");
+            MessageDigest md = MessageDigest.getInstance("SHA");
             md.update(password.getBytes());
-            byte[] rbt=md.digest();
-            StringBuilder sb=new StringBuilder();
-            for(byte b:rbt){
+            byte[] rbt = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (byte b : rbt) {
                 sb.append(String.format("%02x", b));
             }
             return sb.toString();
         } catch (Exception e) {
         }
-         return null;
+        return null;
     }
-   
+
     public static void main(String args[]) {
-       
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new awal().setVisible(true);

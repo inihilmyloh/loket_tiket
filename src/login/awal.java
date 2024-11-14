@@ -35,7 +35,6 @@ public class awal extends javax.swing.JFrame {
         initComponents();
         hide.setVisible(false);
         keluar2.setVisible(false); 
-        maxi2.setVisible(false);
         mini2.setVisible(false); 
         
         gae.addMouseListener(new MouseAdapter() {
@@ -62,8 +61,6 @@ public class awal extends javax.swing.JFrame {
         pass = new javax.swing.JPasswordField();
         mini = new javax.swing.JLabel();
         mini2 = new javax.swing.JLabel();
-        maxi = new javax.swing.JLabel();
-        maxi2 = new javax.swing.JLabel();
         keluar = new javax.swing.JLabel();
         keluar2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -145,7 +142,7 @@ public class awal extends javax.swing.JFrame {
                 miniMouseExited(evt);
             }
         });
-        getContentPane().add(mini, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 10, -1, -1));
+        getContentPane().add(mini, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 0, -1, -1));
 
         mini2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/mini 2.png"))); // NOI18N
         mini2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -159,32 +156,7 @@ public class awal extends javax.swing.JFrame {
                 mini2MouseExited(evt);
             }
         });
-        getContentPane().add(mini2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1320, 10, -1, -1));
-
-        maxi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/maxi.png"))); // NOI18N
-        maxi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                maxiMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                maxiMouseExited(evt);
-            }
-        });
-        getContentPane().add(maxi, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 10, -1, -1));
-
-        maxi2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/maxi 2.png"))); // NOI18N
-        maxi2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                maxi2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                maxi2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                maxi2MouseExited(evt);
-            }
-        });
-        getContentPane().add(maxi2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 10, -1, -1));
+        getContentPane().add(mini2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1360, 0, -1, -1));
 
         keluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/keluar.png"))); // NOI18N
         keluar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -195,7 +167,7 @@ public class awal extends javax.swing.JFrame {
                 keluarMouseExited(evt);
             }
         });
-        getContentPane().add(keluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 10, -1, -1));
+        getContentPane().add(keluar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 0, -1, -1));
 
         keluar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/keluar 2.png"))); // NOI18N
         keluar2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -209,7 +181,7 @@ public class awal extends javax.swing.JFrame {
                 keluar2MouseExited(evt);
             }
         });
-        getContentPane().add(keluar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 10, -1, -1));
+        getContentPane().add(keluar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1400, 0, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambar/sepele.png"))); // NOI18N
         jLabel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -225,7 +197,7 @@ public class awal extends javax.swing.JFrame {
                 jLabel1MousePressed(evt);
             }
         });
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 3020, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1440, 810));
 
         pack();
         setLocationRelativeTo(null);
@@ -353,34 +325,6 @@ public class awal extends javax.swing.JFrame {
        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_keluarMouseExited
 
-    private void maxiMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxiMouseEntered
-       maxi2.setVisible(true);
-      maxi.setVisible(false);
-      setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_maxiMouseEntered
-
-    private void maxiMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxiMouseExited
-        maxi.setVisible(true);
-      maxi2.setVisible(false);
-       setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_maxiMouseExited
-
-    private void maxi2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxi2MouseClicked
-        
-    }//GEN-LAST:event_maxi2MouseClicked
-
-    private void maxi2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxi2MouseEntered
-         maxi2.setVisible(true);
-      maxi.setVisible(false);
-      setCursor(new Cursor(Cursor.HAND_CURSOR));
-    }//GEN-LAST:event_maxi2MouseEntered
-
-    private void maxi2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_maxi2MouseExited
-        maxi.setVisible(true);
-      maxi2.setVisible(false);
-       setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-    }//GEN-LAST:event_maxi2MouseExited
-
     private void miniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_miniMouseEntered
       mini.setVisible(false);
       mini2.setVisible(true);
@@ -462,8 +406,6 @@ public class awal extends javax.swing.JFrame {
     private javax.swing.JLabel keluar;
     private javax.swing.JLabel keluar2;
     private javax.swing.JButton login;
-    private javax.swing.JLabel maxi;
-    private javax.swing.JLabel maxi2;
     private javax.swing.JLabel mini;
     private javax.swing.JLabel mini2;
     private javax.swing.JPasswordField pass;
